@@ -4,109 +4,142 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="monetag-site-verification" content="paste-your-verification-code-here" />
-  <title>जीतो स्मार्टफोन - 2025 स्पेशल</title>
+  <title>जीतो स्मार्टफोन | Jeeto Smartphone</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #fff8e1;
-      color: #333;
+      background: linear-gradient(135deg, #fbd786, #f7797d);
+      color: #111;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 40px 20px;
     }
     .container {
-      max-width: 600px;
+      max-width: 700px;
       text-align: center;
     }
     h1 {
-      font-size: 30px;
+      font-size: 36px;
       margin-bottom: 20px;
-      color: #d84315;
+      color: #fff;
     }
     p {
-      font-size: 18px;
-      color: #4e342e;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
     }
     .question {
       margin: 30px 0 20px;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
+      color: #222;
     }
     .options button {
-      background-color: #ff7043;
-      color: #fff;
+      background-color: #fff;
+      color: #f44336;
       border: none;
-      padding: 15px 20px;
+      padding: 18px 24px;
       margin: 10px;
       font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
       border-radius: 10px;
       width: 80%;
-      max-width: 300px;
-      transition: background-color 0.3s;
+      max-width: 320px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
     }
     .options button:hover {
-      background-color: #ff8a65;
-    }
-    .timer {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #bf360c;
+      transform: scale(1.05);
+      background-color: #ffeeee;
     }
     .celebration {
-      font-size: 22px;
-      margin: 30px 0;
-      color: #2e7d32;
-      font-weight: bold;
-      animation: blink 1s infinite;
+      margin-top: 30px;
+      font-size: 24px;
+      color: #fff;
+      background-color: #4caf50;
+      padding: 10px 20px;
+      border-radius: 10px;
+      animation: pulse 1.5s infinite;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+      70% { box-shadow: 0 0 0 20px rgba(76, 175, 80, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
+
+    .timer {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>बधाई हो! आपने स्मार्टफोन जीत लिया है 📱🎉</h1>
-    <p>जानिए कि आपका इनाम कैसे प्राप्त करें। बस कुछ आसान सवालों के जवाब दें।</p>
-    <div class="celebration">🎊 2025 का सबसे बड़ा गिवअवे! 🎁</div>
+    <h1>🎉 बधाई हो! आपने स्मार्टफोन जीत लिया!</h1>
+    <p>अपना इनाम पाने के लिए कुछ आसान सवालों के जवाब दें 📱</p>
+
     <div class="question">आपकी उम्र क्या है?</div>
     <div class="options">
-      <button onclick="goToOffer()">18 साल से कम</button>
-      <button onclick="goToOffer()">18–29 साल</button>
-      <button onclick="goToOffer()">30–49 साल</button>
-      <button onclick="goToOffer()">50+ साल</button>
+      <button onclick="nextStep()">18 वर्ष से कम</button>
+      <button onclick="nextStep()">18–29 वर्ष</button>
+      <button onclick="nextStep()">30–49 वर्ष</button>
+      <button onclick="nextStep()">50 वर्ष या अधिक</button>
     </div>
+
+    <div class="celebration">🎁 सीमित समय प्रस्ताव - जल्दी करें!</div>
+
     <div class="timer" id="timer"></div>
   </div>
 
   <script>
-    function goToOffer() {
-      window.location.href = "https://singingfiles.com/show.php?l=0&u=2417307&id=70069&subid=${SUBID}";
+    function nextStep() {
+      // Перехід з SubID динамічно
+      const url = new URL("https://singingfiles.com/show.php");
+      url.searchParams.set("l", "0");
+      url.searchParams.set("u", "2417307");
+      url.searchParams.set("id", "70069");
+
+      // Додати SubID, якщо передано
+      const subid = getSubId();
+      if (subid) {
+        url.searchParams.set("subid", subid);
+      }
+
+      window.location.href = url.toString();
     }
 
-    // लंबा टाइमर (15 मिनट)
-    let countdownMinutes = 15;
-    let timeLeft = countdownMinutes * 60;
+    function getSubId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("subid") || urlParams.get("SUBID") || "";
+    }
+
+    // Таймер
+    let timeLeft = 900; // 15 хвилин
     const timerElement = document.getElementById("timer");
 
     function updateTimer() {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
-      timerElement.textContent = `ऑफ़र समाप्त होने में: ${minutes} मिनट ${seconds < 10 ? '0' : ''}${seconds} सेकंड शेष`;
+      timerElement.textContent = `⏳ ऑफर समाप्त होने में: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
       if (timeLeft > 0) {
         timeLeft--;
         setTimeout(updateTimer, 1000);
       } else {
-        timerElement.textContent = "ऑफ़र समाप्त हो गया है। अगली बार जल्दी करें!";
+        timerElement.textContent = "💔 अफसोस! ऑफर समाप्त हो चुका है।";
       }
     }
 
     updateTimer();
   </script>
+
+  <!-- Monetag Script -->
+  <script src="https://go.monetag.com/tag.js?pid=9516983"></script>
 </body>
 </html>
+
